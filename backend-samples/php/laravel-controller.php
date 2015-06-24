@@ -5,10 +5,12 @@ class SerieController extends BaseController
     public function postQuickUpdate()
     {
         $inputs = Input::all();
+        
+        $data[$inputs['name']] = $inputs['value'];
 
         $serie = Serie::find($inputs['pk']);
 
-        $serie->$inputs['name'] = $inputs['value'];
+        $serie->fill($data);
 
         return $serie->save();
     }
